@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>bub fm</title>
+
+  <style>
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: transparent;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================
+       PLAYER
+       ========================= */
+
+    .cd-player {
+      width: 100%;
+      height: 100%;
+
+      padding: 11px 18px;
+
+      border: 3px solid black;
+
+      background: white;
+      color: black;
+
+      text-align: center;
+
+      box-sizing: border-box;
+    }
+
+
+    .cd-player-title {
+      font-size: 16px;
+
+      letter-spacing: 3px;
+
+      margin-bottom: 6px;
+    }
+
+
+    /* =========================
+       CD
+       ========================= */
+
+    .cd-wrapper {
+      display: flex;
+
+      justify-content: center;
+
+      margin-bottom: 5px;
+    }
+
+
+    .cd {
+      width: 110px;
+      height: 110px;
+
+      border-radius: 50%;
+
+      border: 3px solid black;
+
+      position: relative;
+
+      box-sizing: border-box;
+
+      overflow: hidden;
+
+      animation: spin 4s linear infinite;
+
+      animation-play-state: paused;
+    }
+
+
+    .cd.playing {
+      animation-play-state: running;
+    }
+
+
+    @keyframes spin {
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    /* =========================
+       CD 1 — SILVER
+       ========================= */
+
+    .cd.silver {
+
+      background:
+
+        radial-gradient(
+          circle,
+          transparent 0%,
+          transparent 18%,
+          rgba(255,255,255,0.6) 19%,
+          rgba(220,220,220,0.7) 40%,
+          rgba(255,255,255,0.7) 65%,
+          rgba(190,190,190,0.8) 100%
+        ),
+
+        conic-gradient(
+          from 20deg,
+          #f4c8d8,
+          #c7ddff,
+          #c9f4e7,
+          #fff2bd,
+          #dfc9ff,
+          #bdeeff,
+          #f4c8d8
+        );
+    }
+
+
+    .cd.silver::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 7px;
+
+      border-radius: 50%;
+
+      background:
+        repeating-radial-gradient(
+          circle,
+          transparent 0px,
+          transparent 3px,
+          rgba(255,255,255,0.20) 4px,
+          transparent 5px
+        );
+
+      pointer-events: none;
+    }
+
+
+    .cd.silver::after {
+      content: "";
+
+      position: absolute;
+
+      width: 75%;
+      height: 20%;
+
+      left: 12%;
+      top: 16%;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.65),
+          rgba(255,255,255,0)
+        );
+
+      transform: rotate(-12deg);
+
+      pointer-events: none;
+    }
+
+
+    /* =========================
+       CD 2 — BLUE
+       ========================= */
+
+    .cd.blue {
+
+      background:
+        radial-gradient(
+          circle,
+          #eeeeee 0%,
+          #eeeeee 11%,
+          #b7dbe3 12%,
+          #b7dbe3 16%,
+          #7ab4c3 17%,
+          #9acdd6 34%,
+          #367f92 54%,
+          #72b3c0 72%,
+          #285f72 100%
+        );
+    }
+
+
+    .cd.blue::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 5px;
+
+      border-radius: 50%;
+
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 3px,
+          rgba(255,255,255,0.09) 4px
+        );
+
+      opacity: 0.7;
+
+      pointer-events: none;
+    }
+
+
+    .cd.blue::after {
+      content: "";
+
+      position: absolute;
+
+      width: 82%;
+      height: 24%;
+
+      left: 9%;
+      top: 12%;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.55),
+          rgba(255,255,255,0)
+        );
+
+      transform: rotate(-8deg);
+
+      pointer-events: none;
+    }
+
+
+    /* =========================
+       CD 3 — BLACK
+       ========================= */
+
+    .cd.black {
+
+      background:
+        repeating-radial-gradient(
+          circle,
+          #080808 0px,
+          #080808 4px,
+          #262626 5px,
+          #0c0c0c 7px
+        );
+    }
+
+
+    .cd.black::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 13px;
+
+      border-radius: 50%;
+
+      background:
+        conic-gradient(
+          #121212,
+          #3a3a3a,
+          #111111,
+          #454545,
+          #090909,
+          #303030,
+          #121212
+        );
+
+      opacity: 0.85;
+
+      pointer-events: none;
+    }
+
+
+    .cd.black::after {
+      content: "";
+
+      position: absolute;
+
+      width: 72%;
+      height: 18%;
+
+      left: 14%;
+      top: 16%;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.35),
+          rgba(255,255,255,0)
+        );
+
+      transform: rotate(-13deg);
+
+      pointer-events: none;
+    }
+
+
+    /* =========================
+       CENTER OF CD
+       ========================= */
+
+    .cd-center {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.85);
+
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+
+      z-index: 4;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .cd-hole {
+      width: 19px;
+      height: 19px;
+
+      border: 3px solid black;
+
+      background: white;
+
+      border-radius: 50%;
+
+      box-sizing: border-box;
+    }
+
+
+    /* =========================
+       SONG INFORMATION
+       ========================= */
+
+    .song-info {
+      margin-bottom: 3px;
+    }
+
+
+    #songTitle {
+      font-size: 14px;
+
+      font-weight: bold;
+    }
+
+
+    #artistName {
+      font-size: 11px;
+
+      margin-top: 1px;
+    }
+
+
+    /* =========================
+       PROGRESS BAR
+       ========================= */
+
+    .progress-container {
+      margin: 3px 0 4px;
+    }
+
+
+    #progress {
+      width: 100%;
+
+      cursor: pointer;
+
+      accent-color: black;
+    }
+
+
+    /* =========================
+       PLAY / PAUSE BUTTON
+       ========================= */
+
+    .player-controls {
+      display: flex;
+
+      justify-content: center;
+
+      margin-bottom: 7px;
+    }
+
+
+    .player-controls button {
+      width: 48px;
+      height: 28px;
+
+      border: 2px solid black;
+
+      background: white;
+
+      color: black;
+
+      font-size: 14px;
+
+      cursor: pointer;
+
+      padding: 0;
+    }
+
+
+    .player-controls button:hover {
+      background: black;
+
+      color: white;
+    }
+
+
+    /* =========================
+       TRACK BUTTONS
+       ========================= */
+
+    .track-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-bottom: 5px;
+    }
+
+
+    .track-button {
+      width: 38px;
+      height: 27px;
+
+      border: 2px solid black;
+
+      background: white;
+
+      color: black;
+
+      font-size: 13px;
+
+      cursor: pointer;
+
+      padding: 0;
+    }
+
+
+    .track-button:hover {
+      background: black;
+
+      color: white;
+    }
+
+
+    .track-button.active {
+      background: black;
+
+      color: white;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="cd-player">
+
+
+    <!-- TITLE -->
+
+    <div class="cd-player-title">
+      
+    </div>
+
+
+    <!-- CD -->
+
+    <div class="cd-wrapper">
+
+      <div
+        class="cd silver"
+        id="cd"
+      >
+
+        <div class="cd-center">
+
+          <div class="cd-hole"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SONG INFO -->
+
+    <div class="song-info">
+
+      <div id="songTitle">
+        mix
+      </div>
+
+      <div id="artistName">
+        bubsier
+      </div>
+
+    </div>
+
+
+    <!-- PROGRESS BAR -->
+
+    <div class="progress-container">
+
+      <input
+        type="range"
+        id="progress"
+        value="0"
+        min="0"
+        max="100"
+      >
+
+    </div>
+
+
+    <!-- PLAY / PAUSE -->
+
+    <div class="player-controls">
+
+      <button
+        id="playButton"
+        type="button"
+      >
+        ▶
+      </button>
+
+    </div>
+
+
+    <!-- TRACK SELECTION -->
+
+    <div class="track-buttons">
+
+      <button
+        class="track-button active"
+        data-track="0"
+        type="button"
+      >
+        1
+      </button>
+
+
+      <button
+        class="track-button"
+        data-track="1"
+        type="button"
+      >
+        2
+      </button>
+
+
+      <button
+        class="track-button"
+        data-track="2"
+        type="button"
+      >
+        3
+      </button>
+
+    </div>
+
+
+    <!-- THIS WAS MISSING -->
+
+    <audio
+      id="audio"
+      preload="metadata"
+    ></audio>
+
+
+  </div>
+
+
+
+  <script>
+
+    // =============================
+    // SONGS
+    // =============================
+
+    const songs = [
+
+      {
+        title: "close 2 me",
+        artist: "rochelle jordan",
+        file: "Close2Me.mp3",
+        cdStyle: "black"
+      },
+
+      {
+        title: "kongolese sous bbl",
+        artist: "theodora",
+        file: "bbl.mp3",
+        cdStyle: "silver"
+      },
+
+      {
+        title: "germany",
+        artist: "ikkimel - ski aggu",
+        file: "germany.mp3",
+        cdStyle: "blue"
+      }
+
+    ];
+
+
+
+    // =============================
+    // VARIABLES
+    // =============================
+
+    let currentSong = 0;
+
+
+
+    const audio =
+      document.getElementById("audio");
+
+
+    const playButton =
+      document.getElementById("playButton");
+
+
+    const songTitle =
+      document.getElementById("songTitle");
+
+
+    const artistName =
+      document.getElementById("artistName");
+
+
+    const progress =
+      document.getElementById("progress");
+
+
+    const cd =
+      document.getElementById("cd");
+
+
+    const trackButtons =
+      document.querySelectorAll(".track-button");
+
+
+
+    // =============================
+    // LOAD SONG
+    // =============================
+
+    function loadSong(index) {
+
+      const song = songs[index];
+
+
+      audio.src = song.file;
+
+      audio.load();
+
+
+      songTitle.textContent =
+        song.title;
+
+
+      artistName.textContent =
+        song.artist;
+
+
+      progress.value = 0;
+
+
+      // Remove old CD appearance
+
+      cd.classList.remove(
+        "silver",
+        "blue",
+        "black",
+        "playing"
+      );
+
+
+      // Add new CD appearance
+
+      cd.classList.add(
+        song.cdStyle
+      );
+
+
+      updateTrackButtons();
+
+    }
+
+
+
+    // =============================
+    // TRACK BUTTON APPEARANCE
+    // =============================
+
+    function updateTrackButtons() {
+
+      trackButtons.forEach(
+        function(button) {
+
+          button.classList.remove(
+            "active"
+          );
+
+        }
+      );
+
+
+      trackButtons[currentSong]
+        .classList.add("active");
+
+    }
+
+
+
+    // =============================
+    // TRACK BUTTONS
+    // =============================
+
+    trackButtons.forEach(
+      function(button) {
+
+        button.addEventListener(
+          "click",
+
+          function() {
+
+            const newSong =
+              Number(
+                button.dataset.track
+              );
+
+
+            // Already selected?
+            // Do nothing.
+
+            if (newSong === currentSong) {
+              return;
+            }
+
+
+            // Stop current song
+
+            audio.pause();
+
+
+            // Change track
+
+            currentSong = newSong;
+
+
+            // Load it
+
+            loadSong(currentSong);
+
+
+            // IMPORTANT:
+            // selecting a track DOES NOT play it
+
+            playButton.textContent =
+              "▶";
+
+
+            cd.classList.remove(
+              "playing"
+            );
+
+          }
+
+        );
+
+      }
+
+    );
+
+
+
+    // =============================
+    // PLAY / PAUSE
+    // =============================
+
+    playButton.addEventListener(
+      "click",
+
+      async function() {
+
+        if (audio.paused) {
+
+          try {
+
+            await audio.play();
+
+          }
+
+          catch (error) {
+
+            console.log(
+              "Audio could not play:",
+              error
+            );
+
+          }
+
+        }
+
+        else {
+
+          audio.pause();
+
+        }
+
+      }
+
+    );
+
+
+
+    // =============================
+    // WHEN AUDIO PLAYS
+    // =============================
+
+    audio.addEventListener(
+      "play",
+
+      function() {
+
+        playButton.textContent =
+          "⏸";
+
+
+        cd.classList.add(
+          "playing"
+        );
+
+      }
+
+    );
+
+
+
+    // =============================
+    // WHEN AUDIO PAUSES
+    // =============================
+
+    audio.addEventListener(
+      "pause",
+
+      function() {
+
+        playButton.textContent =
+          "▶";
+
+
+        cd.classList.remove(
+          "playing"
+        );
+
+      }
+
+    );
+
+
+
+    // =============================
+    // PROGRESS BAR
+    // =============================
+
+    audio.addEventListener(
+      "timeupdate",
+
+      function() {
+
+        if (
+          audio.duration &&
+          !isNaN(audio.duration)
+        ) {
+
+          progress.value =
+            (
+              audio.currentTime /
+              audio.duration
+            ) * 100;
+
+        }
+
+      }
+
+    );
+
+
+
+    // =============================
+    // SEEK
+    // =============================
+
+    progress.addEventListener(
+      "input",
+
+      function() {
+
+        if (
+          audio.duration &&
+          !isNaN(audio.duration)
+        ) {
+
+          audio.currentTime =
+            (
+              progress.value / 100
+            ) * audio.duration;
+
+        }
+
+      }
+
+    );
+
+
+
+    // =============================
+    // SONG ENDS
+    // =============================
+
+    audio.addEventListener(
+      "ended",
+
+      function() {
+
+        audio.currentTime = 0;
+
+        progress.value = 0;
+
+
+        cd.classList.remove(
+          "playing"
+        );
+
+
+        playButton.textContent =
+          "▶";
+
+      }
+
+    );
+
+
+
+    // =============================
+    // LOAD FIRST SONG
+    // =============================
+
+    loadSong(currentSong);
+
+  </script>
+
+
+</body>
+
+</html>
