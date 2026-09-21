@@ -13,5 +13,6 @@ const visitedCountries = [
     "United Kingdom",
     "Vatican",
     "Costa Rica",
-    "Nicaragua"
+    "Nicaragua",
+    "Germany"
 ];
