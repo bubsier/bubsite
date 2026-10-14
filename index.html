@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>the bubsite</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: white;
+      color: black;
+
+      font-family: monospace;
+      text-transform: lowercase;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+
+    /* =========================
+       welcome screen
+       ========================= */
+
+    #welcomeScreen {
+      position: fixed;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: white;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      z-index: 9999;
+
+      cursor: pointer;
+
+      opacity: 1;
+
+      transition: opacity 1.2s ease;
+    }
+
+    #welcomeScreen h1 {
+      margin: 0;
+
+      font-size:
+        clamp(
+          40px,
+          8vw,
+          75px
+        );
+    }
+
+    #welcomeScreen img {
+      width: 180px;
+      height: 180px;
+
+      margin-top: 20px;
+
+      object-fit: contain;
+    }
+
+    #welcomeScreen p {
+      margin-top: 16px;
+
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       page
+       ========================= */
+
+    .page {
+      position: relative;
+
+      width: 100vw;
+      height: 100vh;
+
+      overflow: hidden;
+
+      background: white;
+    }
+
+
+    /* =========================
+       sidebar menu
+       ========================= */
+
+    .side-menu {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 245px;
+      height: 100vh;
+
+      padding:
+        20px
+        18px;
+
+      background: white;
+
+      border-right:
+        5px solid black;
+
+      z-index: 100;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-header {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-title {
+      margin:
+        0
+        0
+        24px;
+
+      font-size: 44px;
+
+      font-weight: normal;
+    }
+
+    .menu-toggle {
+      display: none;
+
+      width: 44px;
+      height: 44px;
+
+      padding: 0;
+
+      border:
+        4px solid black;
+
+      background: white;
+      color: black;
+
+      font-family: monospace;
+
+      font-size: 24px;
+
+      cursor: pointer;
+    }
+
+    .menu-toggle:hover {
+      background: black;
+      color: white;
+    }
+
+    .menu-links {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 18px;
+    }
+
+    .menu-link {
+      width: 100%;
+
+      min-height: 67px;
+
+      padding: 10px;
+
+      border:
+        4px solid black;
+
+      background: white;
+      color: black;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      font-size: 18px;
+    }
+
+    .menu-link:hover,
+    .menu-link.active {
+      background: black;
+      color: white;
+    }
+
+    .contact-menu-link {
+      margin-top: auto;
+    }
+
+
+    /* =========================
+       homepage content area
+       ========================= */
+
+    .home-content {
+      position: absolute;
+
+      left: 245px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================
+       featured center section
+       ========================= */
+
+    .feature-stack {
+      position: absolute;
+
+      left: 50%;
+      top: 48%;
+
+      transform:
+        translate(
+          -50%,
+          -50%
+        );
+
+      width:
+        min(
+          850px,
+          72%
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+
+      z-index: 30;
+    }
+
+
+    /* soundcloud */
+
+    .soundcloud-main {
+      width: 76%;
+
+      min-height: 90px;
+
+      border:
+        5px solid black;
+
+      background: white;
+      color: black;
+
+      text-decoration: none;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 4px;
+
+      font-size:
+        clamp(
+          28px,
+          3vw,
+          42px
+        );
+
+      transition:
+        background 0.15s ease,
+        color 0.15s ease;
+    }
+
+    .soundcloud-main small {
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .soundcloud-main:hover {
+      background: black;
+      color: white;
+    }
+
+
+    /* title */
+
+    .main-title {
+      margin:
+        60px
+        0;
+
+      text-align: center;
+
+      font-size:
+        clamp(
+          42px,
+          5vw,
+          76px
+        );
+
+      line-height: 1;
+
+      white-space: nowrap;
+    }
+
+
+    /* instagram */
+
+    .instagram-main {
+      min-width: 330px;
+      min-height: 78px;
+
+      padding:
+        14px
+        32px;
+
+      border:
+        4px solid black;
+
+      background: white;
+      color: black;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size:
+        clamp(
+          22px,
+          2.2vw,
+          31px
+        );
+
+      transform:
+        rotate(1deg);
+
+      transition:
+        background 0.15s ease,
+        color 0.15s ease;
+    }
+
+    .instagram-main:hover {
+      background: black;
+      color: white;
+    }
+
+
+    /* =========================
+       secondary links
+       desktop randomized
+       ========================= */
+
+    .secondary-links {
+      display: contents;
+    }
+
+    .random-link {
+      position: absolute;
+
+      min-width: 130px;
+      min-height: 56px;
+
+      padding:
+        10px
+        18px;
+
+      border:
+        3px solid black;
+
+      background: white;
+      color: black;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size:
+        clamp(
+          16px,
+          1.5vw,
+          23px
+        );
+
+      white-space: nowrap;
+
+      z-index: 15;
+    }
+
+    .random-link:hover {
+      background: black;
+      color: white;
+    }
+
+
+    /* =========================
+       shared footer component
+       ========================= */
+
+    .corner-footer {
+      position: absolute;
+
+      left: 28px;
+      right: 22px;
+      bottom: 18px;
+
+      height: 175px;
+
+      pointer-events: none;
+
+      z-index: 50;
+    }
+
+    .figure-corner {
+      position: absolute;
+
+      right: 0;
+      bottom: 0;
+
+      width: 150px;
+      height: 175px;
+    }
+
+    .figure-corner img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+    }
+
+    .est {
+      position: absolute;
+
+      left: 0;
+      bottom: 0;
+
+      font-size: 12px;
+
+      letter-spacing: 1px;
+    }
+
+
+    /* =========================
+       tablet / mobile
+       ========================= */
+
+    @media (max-width: 950px) {
+
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .page {
+        width: 100%;
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow: visible;
+      }
+
+
+      /* mobile menu */
+
+      .side-menu {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        padding:
+          14px
+          18px;
+
+        border-right: none;
+        border-bottom:
+          5px solid black;
+      }
+
+      .menu-header {
+        min-height: 54px;
+      }
+
+      .menu-title {
+        margin: 0;
+
+        font-size: 32px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .menu-links {
+        display: none;
+
+        flex: none;
+
+        margin-top: 15px;
+      }
+
+      .side-menu.open .menu-links {
+        display: grid;
+
+        grid-template-columns:
+          1fr
+          1fr;
+
+        gap: 10px;
+      }
+
+      .menu-link {
+        min-height: 58px;
+
+        font-size: 15px;
+      }
+
+      .contact-menu-link {
+        margin-top: 0;
+      }
+
+
+      /* homepage */
+
+      .home-content {
+        position: relative;
+
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+
+        width: 100%;
+
+        padding:
+          58px
+          24px
+          26px;
+
+        overflow: visible;
+      }
+
+
+      /* feature stack */
+
+      .feature-stack {
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        transform: none;
+
+        width: 100%;
+
+        margin: 0 auto;
+
+        padding: 0;
+      }
+
+      .soundcloud-main {
+        width: 100%;
+
+        max-width: 520px;
+
+        min-height: 105px;
+
+        margin:
+          0
+          auto;
+
+        font-size:
+          clamp(
+            28px,
+            8vw,
+            42px
+          );
+      }
+
+      .soundcloud-main small {
+        margin-top: 3px;
+
+        font-size: 12px;
+      }
+
+      .main-title {
+        width: 100%;
+
+        margin:
+          58px
+          0;
+
+        font-size:
+          clamp(
+            28px,
+            7vw,
+            44px
+          );
+
+        line-height: 1;
+
+        white-space: nowrap;
+
+        text-align: center;
+      }
+
+      .instagram-main {
+        width: 78%;
+
+        max-width: 380px;
+
+        min-width: 0;
+        min-height: 86px;
+
+        margin:
+          0
+          auto;
+
+        transform:
+          rotate(1deg);
+
+        font-size:
+          clamp(
+            24px,
+            7vw,
+            34px
+          );
+      }
+
+
+      /* secondary links become 2x2 */
+
+      .secondary-links {
+        display: grid;
+
+        grid-template-columns:
+          1fr
+          1fr;
+
+        gap:
+          14px
+          12px;
+
+        width: 100%;
+
+        max-width: 520px;
+
+        margin:
+          75px
+          auto
+          0;
+      }
+
+      .random-link {
+        position: relative !important;
+
+        left: auto !important;
+        top: auto !important;
+
+        transform: none !important;
+
+        width: 100%;
+
+        min-width: 0;
+        min-height: 64px;
+
+        padding:
+          10px
+          8px;
+
+        margin: 0;
+
+        font-size:
+          clamp(
+            15px,
+            4.5vw,
+            20px
+          );
+      }
+
+      .twitter-link {
+        order: 1;
+      }
+
+      .letterboxd-link {
+        order: 2;
+      }
+
+      .strava-link {
+        order: 3;
+      }
+
+      .depop-link {
+        order: 4;
+      }
+
+
+      /* footer */
+
+      .corner-footer {
+        position: relative;
+
+        left: auto;
+        right: auto;
+        bottom: auto;
+
+        width: 100%;
+        height: 145px;
+
+        margin:
+          60px
+          0
+          0;
+
+        display: flex;
+
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .figure-corner {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        width: 125px;
+        height: 145px;
+
+        flex: 0 0 auto;
+      }
+
+      .est {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+
+        margin: 0;
+
+        padding-bottom: 3px;
+
+        font-size: 12px;
+      }
+
+    }
+
+
+    /* =========================
+       smaller phones
+       ========================= */
+
+    @media (max-width: 520px) {
+
+      .side-menu.open .menu-links {
+        grid-template-columns: 1fr;
+      }
+
+      .main-title {
+        font-size:
+          clamp(
+            24px,
+            6.5vw,
+            32px
+          );
+      }
+
+      .secondary-links {
+        gap: 10px;
+      }
+
+      .random-link {
+        min-height: 58px;
+
+        font-size: 15px;
+      }
+
+      .corner-footer {
+        height: 128px;
+      }
+
+      .figure-corner {
+        width: 110px;
+        height: 128px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- welcome screen -->
+
+  <div
+    id="welcomeScreen"
+    onclick="enterSite()"
+  >
+
+    <h1>
+      welcome to the bubsite
+    </h1>
+
+    <img
+      src="Figure.JPG"
+      alt=""
+    >
+
+    <p>
+      click to enter
+    </p>
+
+  </div>
+
+
+
+  <main class="page">
+
+
+    <!-- menu -->
+
+    <aside
+      class="side-menu"
+      id="sideMenu"
+    >
+
+      <div class="menu-header">
+
+        <h1 class="menu-title">
+          menu
+        </h1>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          onclick="toggleMenu()"
+          aria-expanded="false"
+          aria-label="open menu"
+        >
+          +
+        </button>
+
+      </div>
+
+
+      <nav class="menu-links">
+
+        <a
+          href="index.html"
+          class="menu-link active"
+        >
+          home
+        </a>
+
+        <a
+          href="about.html"
+          class="menu-link"
+        >
+          about me
+        </a>
+
+        <a
+          href="bubfm.html"
+          class="menu-link"
+        >
+          bubfm
+        </a>
+
+        <a
+          href="askbubsier.html"
+          class="menu-link"
+        >
+          ask bubsier
+        </a>
+
+        <a
+          href="mailto:bubsier04@gmail.com"
+          class="menu-link contact-menu-link"
+        >
+          contact me
+        </a>
+
+      </nav>
+
+    </aside>
+
+
+
+    <!-- homepage content -->
+
+    <div
+      class="home-content"
+      id="homeContent"
+    >
+
+
+      <!-- main feature -->
+
+      <section class="feature-stack">
+
+        <a
+          class="soundcloud-main"
+          href="https://on.soundcloud.com/2V1HensI3C7dCce56i"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          soundcloud
+
+          <small>
+            listen to my mixes →
+          </small>
+        </a>
+
+
+        <h1 class="main-title">
+          going abub &amp; beyond
+        </h1>
+
+
+        <a
+          class="instagram-main"
+          href="https://www.instagram.com/bubsier/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          instagram
+        </a>
+
+      </section>
+
+
+
+      <!-- secondary links -->
+
+      <div class="secondary-links">
+
+        <a
+          href="https://x.com/bubsier04"
+          class="random-link twitter-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          twitter
+        </a>
+
+
+        <a
+          href="https://letterboxd.com/bubsier/"
+          class="random-link letterboxd-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          letterboxd
+        </a>
+
+
+        <a
+          href="#"
+          class="random-link strava-link"
+        >
+          strava
+        </a>
+
+
+        <a
+          href="#"
+          class="random-link depop-link"
+        >
+          depop
+        </a>
+
+      </div>
+
+
+
+      <!-- footer -->
+
+      <div class="corner-footer">
+
+        <div class="est">
+          est. 2025
+        </div>
+
+        <div class="figure-corner">
+
+          <img
+            src="Figure.JPG"
+            alt=""
+          >
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </main>
+
+
+
+  <script>
+
+    const welcomeScreen =
+      document.getElementById(
+        "welcomeScreen"
+      );
+
+    const sideMenu =
+      document.getElementById(
+        "sideMenu"
+      );
+
+    const menuToggle =
+      document.getElementById(
+        "menuToggle"
+      );
+
+    const homeContent =
+      document.getElementById(
+        "homeContent"
+      );
+
+
+    /* welcome screen only once per session */
+
+    if (
+      sessionStorage.getItem(
+        "bubsiteEntered"
+      ) === "yes"
+    ) {
+
+      welcomeScreen.style.display =
+        "none";
+
+    }
+
+
+    function enterSite() {
+
+      sessionStorage.setItem(
+        "bubsiteEntered",
+        "yes"
+      );
+
+      welcomeScreen.style.opacity =
+        "0";
+
+      setTimeout(
+        function() {
+
+          welcomeScreen.style.display =
+            "none";
+
+        },
+        1200
+      );
+
+    }
+
+
+    /* menu */
+
+    function toggleMenu() {
+
+      sideMenu.classList.toggle(
+        "open"
+      );
+
+      const open =
+        sideMenu.classList.contains(
+          "open"
+        );
+
+      menuToggle.textContent =
+        open
+          ? "−"
+          : "+";
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        open
+      );
+
+    }
+
+
+    /* random helper */
+
+    function randomBetween(
+      min,
+      max
+    ) {
+
+      return (
+        Math.random() *
+        (
+          max - min
+        )
+      ) + min;
+
+    }
+
+
+    function overlaps(
+      a,
+      b,
+      spacing = 10
+    ) {
+
+      return !(
+        a.right + spacing < b.left ||
+        a.left - spacing > b.right ||
+        a.bottom + spacing < b.top ||
+        a.top - spacing > b.bottom
+      );
+
+    }
+
+
+    /* randomize desktop links */
+
+    function randomizeSecondaryLinks() {
+
+      if (
+        window.innerWidth <= 950
+      ) {
+        return;
+      }
+
+
+      const links =
+        Array.from(
+          document.querySelectorAll(
+            ".random-link"
+          )
+        );
+
+
+      const w =
+        homeContent.clientWidth;
+
+      const h =
+        homeContent.clientHeight;
+
+
+      const featureSafe = {
+
+        left:
+          w * 0.15,
+
+        right:
+          w * 0.85,
+
+        top:
+          h * 0.14,
+
+        bottom:
+          h * 0.82
+
+      };
+
+
+      const figureSafe = {
+
+        left:
+          w - 195,
+
+        right:
+          w,
+
+        top:
+          h - 205,
+
+        bottom:
+          h
+
+      };
+
+
+      const estSafe = {
+
+        left: 0,
+
+        right: 170,
+
+        top:
+          h - 60,
+
+        bottom:
+          h
+
+      };
+
+
+      const used =
+        [];
+
+
+      links.forEach(
+        function(link) {
+
+
+          const width =
+            link.offsetWidth;
+
+
+          const height =
+            link.offsetHeight;
+
+
+          let placed =
+            false;
+
+
+          let attempts =
+            0;
+
+
+          while (
+            !placed &&
+            attempts < 1000
+          ) {
+
+
+            attempts++;
+
+
+            const x =
+              randomBetween(
+                15,
+                w - width - 15
+              );
+
+
+            const y =
+              randomBetween(
+                15,
+                h - height - 15
+              );
+
+
+            const rect = {
+
+              left: x,
+
+              right:
+                x + width,
+
+              top: y,
+
+              bottom:
+                y + height
+
+            };
+
+
+            if (
+              overlaps(
+                rect,
+                featureSafe,
+                10
+              )
+            ) {
+              continue;
+            }
+
+
+            if (
+              overlaps(
+                rect,
+                figureSafe,
+                5
+              )
+            ) {
+              continue;
+            }
+
+
+            if (
+              overlaps(
+                rect,
+                estSafe,
+                5
+              )
+            ) {
+              continue;
+            }
+
+
+            let bad =
+              false;
+
+
+            for (
+              const previous
+              of used
+            ) {
+
+              if (
+                overlaps(
+                  rect,
+                  previous,
+                  12
+                )
+              ) {
+
+                bad =
+                  true;
+
+                break;
+
+              }
+
+            }
+
+
+            if (
+              bad
+            ) {
+              continue;
+            }
+
+
+            placed =
+              true;
+
+
+            used.push(
+              rect
+            );
+
+
+            link.style.left =
+              x + "px";
+
+
+            link.style.top =
+              y + "px";
+
+
+            link.style.transform =
+              "rotate(" +
+              randomBetween(
+                -5,
+                5
+              ) +
+              "deg)";
+
+
+          }
+
+
+        }
+      );
+
+    }
+
+
+    window.addEventListener(
+      "load",
+      function() {
+
+        randomizeSecondaryLinks();
+
+      }
+    );
+
+
+    let resizeTimer;
+
+
+    window.addEventListener(
+      "resize",
+      function() {
+
+
+        clearTimeout(
+          resizeTimer
+        );
+
+
+        resizeTimer =
+          setTimeout(
+            function() {
+
+
+              if (
+                window.innerWidth > 950
+              ) {
+
+                sideMenu.classList.remove(
+                  "open"
+                );
+
+                menuToggle.textContent =
+                  "+";
+
+
+                randomizeSecondaryLinks();
+
+              }
+
+
+            },
+            200
+          );
+
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>

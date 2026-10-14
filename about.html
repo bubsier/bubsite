@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>about me</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: white;
+      color: black;
+
+      font-family: monospace;
+      text-transform: lowercase;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+
+    .side-menu {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 245px;
+      height: 100vh;
+
+      padding:
+        20px
+        18px;
+
+      background: white;
+
+      border-right:
+        5px solid black;
+
+      z-index: 100;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-header {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-title {
+      margin:
+        0
+        0
+        24px;
+
+      font-size: 44px;
+
+      font-weight: normal;
+    }
+
+    .menu-toggle {
+      display: none;
+
+      width: 44px;
+      height: 36px;
+
+      border:
+        4px solid black;
+
+      background: white;
+
+      font-family: monospace;
+
+      font-size: 22px;
+    }
+
+    .menu-links {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 18px;
+    }
+
+    .menu-link {
+      min-height: 67px;
+
+      padding: 10px;
+
+      border:
+        4px solid black;
+
+      background: white;
+      color: black;
+
+      text-decoration: none;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+    }
+
+    .menu-link:hover,
+    .menu-link.active {
+      background: black;
+      color: white;
+    }
+
+    .contact-menu-link {
+      margin-top: auto;
+    }
+
+
+    .content {
+      position: relative;
+
+      margin-left: 245px;
+
+      width:
+        calc(
+          100% - 245px
+        );
+
+      height: 100vh;
+
+      padding:
+        24px
+        5vw
+        30px;
+
+      overflow: hidden;
+    }
+
+
+    .about-wrapper {
+      width:
+        min(
+          820px,
+          72%
+        );
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+    }
+
+
+    .about-title {
+      width: 100%;
+
+      margin:
+        0
+        0
+        18px;
+
+      text-align: center;
+
+      font-size:
+        clamp(
+          48px,
+          5vw,
+          74px
+        );
+
+      line-height: 1;
+    }
+
+
+    .about-photo {
+      display: block;
+
+      width: 74%;
+
+      max-height: 43vh;
+
+      object-fit: contain;
+
+      filter: grayscale(100%);
+    }
+
+
+    .bio {
+      width: 100%;
+
+      margin-top: 24px;
+
+      text-align: center;
+
+      font-size:
+        clamp(
+          14px,
+          1.1vw,
+          17px
+        );
+
+      line-height: 1.65;
+    }
+
+
+    .bio p {
+      max-width: 760px;
+
+      margin:
+        0
+        auto
+        20px;
+    }
+
+
+    .details {
+      width: 100%;
+
+      margin-top: 4px;
+
+      border-top:
+        3px solid black;
+    }
+
+
+    .detail {
+      min-height: 58px;
+
+      border-bottom:
+        3px solid black;
+
+      display: grid;
+
+      grid-template-columns:
+        120px
+        1fr;
+
+      align-items: center;
+
+      gap: 25px;
+
+      font-size: 14px;
+    }
+
+    .detail-label {
+      font-weight: bold;
+    }
+
+
+    .corner-footer {
+      position: absolute;
+
+      left: 28px;
+      right: 22px;
+      bottom: 18px;
+
+      height: 175px;
+
+      pointer-events: none;
+
+      z-index: 50;
+    }
+
+    .figure-corner {
+      position: absolute;
+
+      right: 0;
+      bottom: 0;
+
+      width: 150px;
+      height: 175px;
+    }
+
+    .figure-corner img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+    }
+
+    .est {
+      position: absolute;
+
+      left: 0;
+      bottom: 0;
+
+      font-size: 12px;
+
+      letter-spacing: 1px;
+    }
+
+
+    @media (max-width: 950px) {
+
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .side-menu {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        padding: 15px;
+
+        border-right: none;
+        border-bottom:
+          5px solid black;
+      }
+
+      .menu-title {
+        margin: 0;
+
+        font-size: 32px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .menu-links {
+        display: none;
+
+        margin-top: 15px;
+      }
+
+      .side-menu.open .menu-links {
+        display: grid;
+
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+
+        gap: 10px;
+      }
+
+      .contact-menu-link {
+        margin-top: 0;
+      }
+
+      .content {
+        margin-left: 0;
+
+        width: 100%;
+        height: auto;
+
+        min-height: 100vh;
+
+        padding:
+          35px
+          20px
+          35px;
+
+        overflow: visible;
+      }
+
+      .about-wrapper {
+        width: 100%;
+      }
+
+      .about-photo {
+        width: 100%;
+
+        max-height: none;
+      }
+
+      .bio {
+        text-align: left;
+      }
+
+
+      .corner-footer {
+        position: relative;
+
+        left: auto;
+        right: auto;
+        bottom: auto;
+
+        width: 100%;
+        height: 135px;
+
+        margin-top: 35px;
+
+        display: flex;
+
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .figure-corner {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        width: 115px;
+        height: 135px;
+      }
+
+      .est {
+        position: relative;
+
+        left: auto;
+        bottom: auto;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .side-menu.open .menu-links {
+        grid-template-columns: 1fr;
+      }
+
+      .detail {
+        grid-template-columns: 1fr;
+
+        gap: 4px;
+
+        padding:
+          12px
+          0;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <aside
+    class="side-menu"
+    id="sideMenu"
+  >
+
+    <div class="menu-header">
+
+      <h1 class="menu-title">
+        menu
+      </h1>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        onclick="toggleMenu()"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <nav class="menu-links">
+
+      <a
+        href="index.html"
+        class="menu-link"
+      >
+        home
+      </a>
+
+      <a
+        href="about.html"
+        class="menu-link active"
+      >
+        about me
+      </a>
+
+      <a
+        href="bubfm.html"
+        class="menu-link"
+      >
+        bubfm
+      </a>
+
+      <a
+        href="askbubsier.html"
+        class="menu-link"
+      >
+        ask bubsier
+      </a>
+
+      <a
+        href="mailto:bubsier04@gmail.com"
+        class="menu-link contact-menu-link"
+      >
+        contact me
+      </a>
+
+    </nav>
+
+  </aside>
+
+
+
+  <main class="content">
+
+
+    <section class="about-wrapper">
+
+
+      <h1 class="about-title">
+        about me
+      </h1>
+
+
+      <img
+        src="me.jpg"
+        class="about-photo"
+        alt="bubsier"
+      >
+
+
+      <div class="bio">
+
+        <p>
+          hi, i'm ben or bubsier.
+          i'm a dj with a love for hard groove,
+          techno, and the atmosphere surrounding
+          club music.
+        </p>
+
+        <p>
+          this site is my corner of the
+          internet for mixes, music i'm listening
+          to, photos, and whatever
+          else i feel like adding over time.
+        </p>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail">
+      
+          <div class="detail-label">
+            sound
+          </div>
+      
+          <div>
+            hard groove / techno
+          </div>
+      
+        </div>
+      
+      
+        <div class="detail">
+      
+          <div class="detail-label">
+            based
+          </div>
+      
+          <div>
+            boston + miami
+          </div>
+      
+        </div>
+      
+      
+        <div class="detail">
+      
+          <div class="detail-label">
+            contact
+          </div>
+      
+          <div>
+            bubsier04@gmail.com
+          </div>
+      
+        </div>
+      
+      </div>
+
+
+    </section>
+
+
+
+    <div class="corner-footer">
+
+      <div class="est">
+        est. 2025
+      </div>
+
+      <div class="figure-corner">
+
+        <img
+          src="Figure.JPG"
+          alt=""
+        >
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <script>
+
+    const sideMenu =
+      document.getElementById(
+        "sideMenu"
+      );
+
+    const menuToggle =
+      document.getElementById(
+        "menuToggle"
+      );
+
+
+    function toggleMenu() {
+
+      sideMenu.classList.toggle(
+        "open"
+      );
+
+      menuToggle.textContent =
+        sideMenu.classList.contains(
+          "open"
+        )
+          ? "−"
+          : "+";
+
+    }
+
+  </script>
+
+
+</body>
+
+</html>
